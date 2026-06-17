@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python для кибербезопасности PRO</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #07111f; color: #e5edf8; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-width: 320px; background:
+        linear-gradient(rgba(34,211,238,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139,92,246,.06) 1px, transparent 1px),
+        radial-gradient(circle at 10% 0%, rgba(34,211,238,.18), transparent 30rem),
+        radial-gradient(circle at 95% 10%, rgba(139,92,246,.16), transparent 32rem),
+        #07111f; background-size: 42px 42px, 42px 42px, auto, auto, auto; }
+      a { color: inherit; }
+      .shell { max-width: 1180px; margin: 0 auto; padding: 32px 20px 56px; }
+      .hero, .card { border: 1px solid rgba(255,255,255,.1); border-radius: 8px; background: rgba(13,24,40,.78); box-shadow: 0 18px 55px rgba(0,0,0,.24); backdrop-filter: blur(14px); }
+      .hero { padding: 32px; background: linear-gradient(135deg, rgba(34,211,238,.16), rgba(13,24,40,.86) 45%, rgba(139,92,246,.16)); }
+      .eyebrow { display: inline-flex; gap: 8px; align-items: center; border: 1px solid rgba(34,211,238,.28); background: rgba(34,211,238,.1); color: #c8fbff; border-radius: 999px; padding: 6px 10px; font-size: 14px; }
+      h1 { margin: 18px 0 10px; font-size: clamp(32px, 5vw, 58px); line-height: 1.02; letter-spacing: 0; }
+      h2 { margin: 0 0 12px; font-size: 22px; }
+      h3 { margin: 0; font-size: 18px; }
+      p { color: #b7c5d8; line-height: 1.65; }
+      .grid { display: grid; gap: 16px; }
+      .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 18px 0 32px; }
+      .modules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .projects { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .card { padding: 20px; }
+      .stat { font-size: 30px; font-weight: 800; color: white; }
+      .pill { display: inline-flex; border: 1px solid rgba(34,211,238,.3); background: rgba(34,211,238,.09); color: #c8fbff; border-radius: 999px; padding: 5px 9px; font-size: 12px; margin: 8px 8px 0 0; }
+      .bar { height: 8px; border-radius: 999px; background: #162337; overflow: hidden; margin-top: 14px; }
+      .fill { height: 100%; width: var(--value); background: linear-gradient(90deg, #22d3ee, #8b5cf6); }
+      .section { margin-top: 32px; }
+      .button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; border-radius: 8px; background: #67e8f9; color: #06111f; font-weight: 800; padding: 10px 14px; text-decoration: none; border: 0; cursor: pointer; }
+      .ghost { background: rgba(255,255,255,.06); color: #e5edf8; border: 1px solid rgba(255,255,255,.12); }
+      .lesson { display: none; margin-top: 18px; }
+      .lesson.open { display: block; }
+      textarea { width: 100%; min-height: 180px; border-radius: 8px; border: 1px solid rgba(34,211,238,.2); background: rgba(2,6,23,.85); color: #bae6fd; padding: 14px; font: 14px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .notice { border: 1px solid rgba(251,191,36,.28); background: rgba(251,191,36,.09); color: #fde68a; border-radius: 8px; padding: 12px; }
+      @media (max-width: 900px) { .stats, .modules, .projects { grid-template-columns: 1fr; } .hero { padding: 24px; } }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <span class="eyebrow">Interactive Cybersecurity Course</span>
+        <h1>Python для кибербезопасности PRO</h1>
+        <p>Практический онлайн-курс для специалистов ИБ: IOC, логи, сетевые проверки, API, DevSecOps, аудит инфраструктуры и финальный проект Security Inspector.</p>
+        <a class="button" href="#modules">Начать обучение</a>
+      </section>
+
+      <section class="grid stats">
+        <div class="card"><div class="stat" id="progress">0%</div><p>Общий прогресс</p></div>
+        <div class="card"><div class="stat">18</div><p>Модулей</p></div>
+        <div class="card"><div class="stat">88</div><p>Уроков</p></div>
+        <div class="card"><div class="stat">12</div><p>Проектов</p></div>
+      </section>
+
+      <section class="section" id="modules">
+        <h2>Модули курса</h2>
+        <div class="grid modules" id="moduleGrid"></div>
+      </section>
+
+      <section class="section">
+        <h2>Интерактивный урок</h2>
+        <div class="card">
+          <h3 id="lessonTitle">Python, VS Code, Git и виртуальное окружение</h3>
+          <p>Разберите тему как часть defensive security workflow: входные данные, проверка, обработка ошибок и воспроизводимый отчет.</p>
+          <div class="notice">Сетевые проверки в курсе ограничиваются localhost или явно разрешенной лабораторной средой.</div>
+          <div class="lesson open" id="lessonBox">
+            <h3>Мини-задача</h3>
+            <p>Допишите функцию нормализации security finding.</p>
+            <textarea id="code">def normalize_finding(raw_value: str) -> dict:
+    # TODO: strip, lower, validate
+    return {"value": raw_value, "valid": False, "source": "lab"}</textarea>
+            <p id="checkResult"></p>
+            <button class="button" onclick="checkCode()">Проверить решение</button>
+            <button class="button ghost" onclick="completeLesson()">Отметить урок</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Практические проекты</h2>
+        <div class="grid projects" id="projectGrid"></div>
+      </section>
+
+      <section class="section card">
+        <h2>Final Capstone: Security Inspector</h2>
+        <p>Финальная платформа объединяет SSL check, HTTP Security Headers, DNS, certificate analysis, IOC check, log analysis, историю проверок и HTML/PDF отчеты.</p>
+        <span class="pill">FastAPI</span><span class="pill">React Dashboard</span><span class="pill">PostgreSQL</span><span class="pill">DevSecOps</span>
+      </section>
+    </main>
+    <script>
+      const modules = [
+        ["Подготовка окружения", "Python, VS Code, Git, venv и структура production-проекта.", "Старт"],
+        ["Основы Python для ИБ", "Типы, условия, циклы, функции, коллекции, ошибки и CLI.", "База"],
+        ["Строки, Regex и IOC", "IPv4, IPv6, URL, Email, Domain, MAC, MD5, SHA1, SHA256.", "База"],
+        ["Файлы и форматы данных", "pathlib, CSV, JSON, XML, YAML и ZIP для аудита каталогов.", "База"],
+        ["Анализ логов", "Windows Event Logs, Syslog, web logs и подозрительные паттерны.", "Средний"],
+        ["Сетевое программирование", "socket, banner grabbing, port scanning, таймауты и ограничения.", "Средний"],
+        ["API и Threat Intelligence", "REST, requests/httpx, secrets, mock TI clients и rate limits.", "Средний"],
+        ["PCAP и сетевой анализ", "Scapy/PyShark, DNS, HTTP и suspicious communication patterns.", "Средний"],
+        ["Криптография и пароли", "Hash functions, salt, bcrypt, Argon2 и secure storage.", "Средний"],
+        ["Secure Coding на Python", "OWASP Top 10, SQLi, command injection, traversal и secrets.", "Средний"],
+        ["FastAPI для Security Tools", "Pydantic, REST endpoints, errors и auth basics.", "Продвинутый"],
+        ["PostgreSQL и хранение данных", "SQLAlchemy, Alembic, IOC и история scan results.", "Продвинутый"],
+        ["Docker и запуск проекта", "Dockerfile, Compose, volumes, networks и env vars.", "Продвинутый"],
+        ["Асинхронность", "asyncio, aiohttp/httpx async, rate limiting и safe retries.", "Продвинутый"],
+        ["DevSecOps", "GitHub Actions, Bandit, Semgrep, Trivy и dependency scanning.", "Продвинутый"],
+        ["AI для кибербезопасности", "LLM use cases, log summarization, reports и prompt safety.", "Продвинутый"],
+        ["Infrastructure Audit Automation", "Huawei/Cisco config parsing, ACL, SSH, SNMP и compliance rules.", "Продвинутый"],
+        ["Final Capstone", "Security Inspector architecture, backend, dashboard, reports, deploy.", "Проект"]
+      ];
+      const projects = ["Password Strength Checker", "IOC Parser", "Directory Scanner", "Log Analyzer", "Port Scanner", "Banner Grabber", "Threat Intelligence Client", "PCAP Analyzer", "Password Auditor", "IOC Search API", "Security Dashboard", "Security Inspector"];
+      const completed = new Set(JSON.parse(localStorage.getItem("completedLessons") || "[]"));
+      function render() {
+        document.getElementById("progress").textContent = Math.round((completed.size / modules.length) * 100) + "%";
+        document.getElementById("moduleGrid").innerHTML = modules.map((m, i) => `<article class="card"><h3>${i}. ${m[0]}</h3><p>${m[1]}</p><span class="pill">${m[2]}</span><div class="bar" style="--value:${completed.has(i) ? 100 : 0}%"><div class="fill"></div></div><p>${completed.has(i) ? "Завершено" : "Не начато"}</p></article>`).join("");
+        document.getElementById("projectGrid").innerHTML = projects.map(p => `<article class="card"><h3>${p}</h3><p>Практический проект для портфолио security tooling.</p><span class="pill">Python</span><span class="pill">Defensive Security</span></article>`).join("");
+      }
+      function completeLesson() { completed.add(0); localStorage.setItem("completedLessons", JSON.stringify([...completed])); render(); }
+      function checkCode() {
+        const code = document.getElementById("code").value.toLowerCase();
+        const ok = ["strip", "lower", "return", "valid"].filter(k => code.includes(k)).length >= 3;
+        document.getElementById("checkResult").textContent = ok ? "Похоже на рабочее MVP-решение." : "Добавьте нормализацию strip/lower и явный valid.";
+      }
+      render();
+    </script>
+  </body>
+</html>
